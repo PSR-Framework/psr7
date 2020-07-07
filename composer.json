@@ -1,5 +1,5 @@
 {
-  "name": "arslanoov/psr7",
+  "name": "arslanoov/furious-psr7",
   "description": "PHP 7.4 implementation of PSR-7",
   "license": "MIT",
   "keywords": ["http", "client", "psr7", "request", "php", "php 7.4"],
