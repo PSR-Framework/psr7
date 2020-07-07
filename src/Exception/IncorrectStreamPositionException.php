@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Arslanoov\Psr7\Exception;
 
-use RuntimeException;
 use Throwable;
 
 class IncorrectStreamPositionException extends RuntimeException
 {
-    protected $message = 'Incorrect stream position.';
+    public function __construct($message = 'Incorrect stream position.', $code = 0, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 }
