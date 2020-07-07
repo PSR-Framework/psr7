@@ -10,7 +10,7 @@ use Arslanoov\Psr7\Stream;
 
 class StreamTest extends TestCase
 {
-    public function testConstructorInitializesProperties()
+    public function testConstructorInitializesProperties(): void
     {
         $handle = fopen('php://temp', 'r+');
         fwrite($handle, 'data');
@@ -24,7 +24,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testStreamClosesHandleOnDestruct()
+    public function testStreamClosesHandleOnDestruct(): void
     {
         $handle = fopen('php://temp', 'r');
         $stream = Stream::new($handle);
@@ -32,7 +32,7 @@ class StreamTest extends TestCase
         $this->assertFalse(is_resource($handle));
     }
 
-    public function testConvertsToString()
+    public function testConvertsToString(): void
     {
         $handle = fopen('php://temp', 'w+');
         fwrite($handle, 'data');
@@ -42,7 +42,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testGetsContents()
+    public function testGetsContents(): void
     {
         $handle = fopen('php://temp', 'w+');
         fwrite($handle, 'data');
@@ -53,7 +53,7 @@ class StreamTest extends TestCase
         $this->assertEquals('', $stream->getContents());
     }
 
-    public function testChecksEof()
+    public function testChecksEof(): void
     {
         $handle = fopen('php://temp', 'w+');
         fwrite($handle, 'data');
@@ -64,7 +64,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testGetSize()
+    public function testGetSize(): void
     {
         $size = filesize(__FILE__);
         $handle = fopen(__FILE__, 'r');
@@ -75,7 +75,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testEnsuresSizeIsConsistent()
+    public function testEnsuresSizeIsConsistent(): void
     {
         $h = fopen('php://temp', 'w+');
         $this->assertEquals(3, fwrite($h, 'foo'));
@@ -87,7 +87,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testProvidesStreamPosition()
+    public function testProvidesStreamPosition(): void
     {
         $handle = fopen('php://temp', 'w+');
         $stream = Stream::new($handle);
@@ -100,7 +100,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testCanDetachStream()
+    public function testCanDetachStream(): void
     {
         $r = fopen('php://temp', 'w+');
         $stream = Stream::new($r);
@@ -165,7 +165,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testCloseClearProperties()
+    public function testCloseClearProperties(): void
     {
         $handle = fopen('php://temp', 'r+');
         $stream = Stream::new($handle);

@@ -7,6 +7,7 @@ namespace Arslanoov\Psr7\Traits;
 use Arslanoov\Psr7\Header\HeaderTrimmer;
 use Arslanoov\Psr7\Header\HeaderValidator;
 use Arslanoov\Psr7\Stream;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
 use Arslanoov\Psr7\Exception\InvalidArgumentException;
 use function in_array;
@@ -15,7 +16,7 @@ use function implode;
 use function is_integer;
 use function array_merge;
 
-trait MessageTrait
+abstract class Message implements MessageInterface
 {
     private string $protocolVersion = '1.1';
     private array $headers = [];
