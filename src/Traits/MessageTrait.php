@@ -10,7 +10,7 @@ use Arslanoov\Psr7\Stream;
 use Psr\Http\Message\StreamInterface;
 use Arslanoov\Psr7\Exception\InvalidArgumentException;
 use function in_array;
-use function strtolower;
+use function mb_strtolower;
 use function implode;
 use function is_integer;
 use function array_merge;
@@ -45,13 +45,13 @@ trait MessageTrait
 
     public function hasHeader($name): bool
     {
-        $header = strtolower($name);
+        $header = mb_strtolower($name);
         return in_array($header, $this->headerNames);
     }
 
     public function getHeader($name): array
     {
-        $headerName = strtolower($name);
+        $headerName = mb_strtolower($name);
         if ($this->hasHeader($headerName)) {
             return $this->headers[$headerName];
         }
@@ -69,7 +69,7 @@ trait MessageTrait
     {
         (new HeaderValidator())->validate($name, $value);
         $value = (new HeaderTrimmer())->trim($value);
-        $header = strtolower($name);
+        $header = mb_strtolower($name);
 
         $message = clone $this;
         if ($oldHeader = $this->headerNames[$header]) {
@@ -98,7 +98,7 @@ trait MessageTrait
 
     public function withoutHeader($name): self
     {
-        $header = strtolower($name);
+        $header = mb_strtolower($name);
         if (!$this->hasHeader($header)) {
             return $this;
         }
@@ -140,7 +140,7 @@ trait MessageTrait
 
             (new HeaderValidator())->validate($header, $value);
             $value = (new HeaderTrimmer())->trim($value);
-            $header = strtolower($header);
+            $header = mb_strtolower($header);
 
             if ($this->hasHeader($header)) {
                 $header = $this->headerNames[$header];
