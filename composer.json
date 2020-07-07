@@ -23,7 +23,10 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "tests\\Arslanoov\\Psr7\\": "tests/"
+      "Tests\\Arslanoov\\Psr7\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "phpunit --colors=always"
   }
 }
