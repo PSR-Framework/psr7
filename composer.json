@@ -1,0 +1,29 @@
+{
+  "name": "arslanoov/psr7",
+  "description": "PHP 7.4 implementation of PSR-7",
+  "license": "MIT",
+  "keywords": ["http", "client", "psr7", "request", "php", "php 7.4"],
+  "authors": [
+    {
+      "name": "Arslanov Rasul",
+      "email": "rasularslanoov@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "psr/http-message": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Arslanoov\\Psr7\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "tests\\Arslanoov\\Psr7\\": "tests/"
+    }
+  }
+}
