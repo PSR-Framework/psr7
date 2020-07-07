@@ -16,7 +16,7 @@ use function implode;
 use function is_integer;
 use function array_merge;
 
-abstract class Message implements MessageInterface
+class Message implements MessageInterface
 {
     private string $protocolVersion = '1.1';
     private array $headers = [];
