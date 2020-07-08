@@ -10,7 +10,7 @@ use Arslanoov\Psr7\Stream;
 
 class StreamTest extends TestCase
 {
-    public function testConstructorInitializesProperties(): void
+    public function testConstructor(): void
     {
         $handle = fopen('php://temp', 'r+');
         fwrite($handle, 'data');
@@ -24,7 +24,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testStreamClosesHandleOnDestruct(): void
+    public function testStreamCloses(): void
     {
         $handle = fopen('php://temp', 'r');
         $stream = Stream::new($handle);
@@ -70,7 +70,7 @@ class StreamTest extends TestCase
         $handle = fopen(__FILE__, 'r');
         $stream = Stream::new($handle);
         $this->assertEquals($size, $stream->getSize());
-        // Load from cache
+
         $this->assertEquals($size, $stream->getSize());
         $stream->close();
     }
@@ -165,7 +165,7 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
-    public function testCloseClearProperties(): void
+    public function testCloseProperties(): void
     {
         $handle = fopen('php://temp', 'r+');
         $stream = Stream::new($handle);

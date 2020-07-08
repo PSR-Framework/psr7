@@ -57,11 +57,12 @@ final class UploadedFile implements UploadedFileInterface
             throw new InvalidUploadErrorException('Invalid error status for UploadedFile');
         }
 
+        $this->error = $error;
+
         if (UPLOAD_ERR_OK !== $error) {
             throw new UploadErrorException(self::ERROR_MESSAGES[$this->error]);
         }
 
-        $this->error = $error;
         $this->size = $size;
         $this->clientFileName = $clientFileName;
         $this->clientMediaType = $clientMediaType;
@@ -120,7 +121,7 @@ final class UploadedFile implements UploadedFileInterface
     {
         $this->validateActive();
 
-        if (!is_string($targetPath) || '' === $targetPath) {
+        if (!is_string($targetPath) or '' === $targetPath) {
             throw new InvalidArgumentException('Invalid path provided for move operation; must be a non-empty string');
         }
 

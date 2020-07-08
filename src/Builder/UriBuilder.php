@@ -41,7 +41,7 @@ final class UriBuilder
                 if ('' !== $authority) {
                     $path = '/' . $path;
                 }
-            } elseif (isset($path[1]) && '/' === $path[1]) {
+            } elseif (isset($path[1]) and '/' === $path[1]) {
                 if ('' === $authority) {
                     $path = '/' . ltrim($path, '/');
                 }
