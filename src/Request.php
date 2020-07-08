@@ -10,7 +10,7 @@ use Psr\Http\Message\UriInterface;
 use function is_string;
 use function preg_match;
 
-final class Request extends Message implements RequestInterface
+class Request extends Message implements RequestInterface
 {
     private string $method;
     private ?string $requestTarget = null;
