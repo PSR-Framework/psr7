@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Arslanoov\Psr7;
 
 use Arslanoov\Psr7\Exception\InvalidArgumentException;
+use Arslanoov\Psr7\Exception\InvalidUploadErrorException;
 use Arslanoov\Psr7\Exception\RuntimeException;
 use Arslanoov\Psr7\Exception\UploadErrorException;
 use Arslanoov\Psr7\Stream;
@@ -30,6 +31,14 @@ class UploadedFileTest extends TestCase
         }
     }
 
+    public function testGetError(): void
+    {
+        $stream = Stream::new('');
+        $upload = new UploadedFile($stream, 0, $error = UPLOAD_ERR_OK);
+
+        $this->assertSame($error, $upload->getError());
+    }
+
     public function testReturnOriginalStream(): void
     {
         $stream = Stream::new('');
@@ -53,6 +62,20 @@ class UploadedFileTest extends TestCase
         $stream = $upload->getStream();
         $this->assertInstanceOf(StreamInterface::class, $stream);
         $this->assertEquals("Foobar", $stream->__toString());
+    }
+
+    public function testInvalidStatus(): void
+    {
+        $this->expectException(InvalidUploadErrorException::class);
+        $this->expectExceptionMessage('Invalid error status for UploadedFile');
+        new UploadedFile(__DIR__.'/Resources/foo.txt', 0, 100);
+    }
+
+    public function testInvalidStreamOrFile(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid stream or file provided for UploadedFile');
+        new UploadedFile(true, 0, UPLOAD_ERR_OK);
     }
 
     public function testSuccess(): void

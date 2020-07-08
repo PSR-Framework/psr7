@@ -303,6 +303,8 @@ class UriTest extends TestCase
     {
         $uri = new Uri();
 
+        $newUri = $uri->withScheme('https');
+
         $this->assertNotSame($uri, $uri->withScheme('https'));
         $this->assertNotSame($uri, $uri->withUserInfo('user', 'pass'));
         $this->assertNotSame($uri, $uri->withHost('somesite.com'));
@@ -310,6 +312,7 @@ class UriTest extends TestCase
         $this->assertNotSame($uri, $uri->withPath('/path/123'));
         $this->assertNotSame($uri, $uri->withQuery('q=abc'));
         $this->assertNotSame($uri, $uri->withFragment('test'));
+        $this->assertNotSame($uri, $newUri);
     }
 
     public function testUtf8Host(): void

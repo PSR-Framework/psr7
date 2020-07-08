@@ -129,9 +129,6 @@ final class Uri implements UriInterface
         }
 
         $scheme = mb_strtolower($scheme);
-        if ($this->scheme === $scheme) {
-            return $this;
-        }
 
         $uri = clone $this;
         $uri->scheme = $scheme;
@@ -145,10 +142,6 @@ final class Uri implements UriInterface
         $info = $user;
         if (null !== $password and '' !== $password) {
             $info .= ':' . $password;
-        }
-
-        if ($this->userInfo === $info) {
-            return $this;
         }
 
         $new = clone $this;

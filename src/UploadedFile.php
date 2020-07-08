@@ -142,6 +142,14 @@ final class UploadedFile implements UploadedFileInterface
         }
     }
 
+    /**
+     * @param bool $moved
+     */
+    public function setMoved(bool $moved): void
+    {
+        $this->moved = $moved;
+    }
+
     // Validate
 
     private function validateActive(): void

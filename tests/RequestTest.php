@@ -13,6 +13,12 @@ use Psr\Http\Message\StreamInterface;
 
 class RequestTest extends TestCase
 {
+    public function testGetMethod(): void
+    {
+        $request = new Request($method = 'GET', '/home');
+        $this->assertEquals($method, $request->getMethod());
+    }
+
     // Uri
 
     public function testStringUri(): void
@@ -69,6 +75,25 @@ class RequestTest extends TestCase
     }
 
     // With
+
+    public function testWithMethodSuccess(): void
+    {
+        $firstRequest = new Request('GET', '/');
+        $secondRequest = $firstRequest
+            ->withMethod($method = 'POST');
+
+        $this->assertEquals($method, $secondRequest->getMethod());
+    }
+
+    public function testWithMethodNotString(): void
+    {
+        $firstRequest = new Request('GET', '/');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Method must be a string');
+
+        $firstRequest
+            ->withMethod($method = true);
+    }
 
     public function testWithRequestTarget(): void
     {
