@@ -12,7 +12,7 @@ use Psr\Http\Message\RequestInterface;
 
 class RequestFactoryTest extends TestCase
 {
-    public function testSuccess(): void
+    public function testCreate(): void
     {
         $request = (new RequestFactory())->createRequest($method = 'GET', $uri = new Uri('/home'));
 
