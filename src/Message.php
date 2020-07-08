@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Traits;
+namespace Arslanoov\Psr7;
 
 use Arslanoov\Psr7\Header\HeaderTrimmer;
 use Arslanoov\Psr7\Header\HeaderValidator;
@@ -18,10 +18,10 @@ use function array_merge;
 
 class Message implements MessageInterface
 {
-    private string $protocolVersion = '1.1';
-    private array $headers = [];
-    private array $headerNames = [];
-    private ?StreamInterface $stream = null;
+    protected string $protocolVersion = '1.1';
+    protected array $headers = [];
+    protected array $headerNames = [];
+    protected ?StreamInterface $stream = null;
 
     // Protocol version
 
@@ -47,14 +47,15 @@ class Message implements MessageInterface
     public function hasHeader($name): bool
     {
         $header = mb_strtolower($name);
-        return in_array($header, $this->headerNames);
+        return isset($this->headerNames[$header]);
     }
 
     public function getHeader($name): array
     {
-        $headerName = mb_strtolower($name);
-        if ($this->hasHeader($headerName)) {
-            return $this->headers[$headerName];
+        $header = mb_strtolower($name);
+        if ($this->hasHeader($header)) {
+            $header = $this->headerNames[$header];
+            return $this->headers[$header];
         }
 
         return [];
@@ -73,11 +74,11 @@ class Message implements MessageInterface
         $header = mb_strtolower($name);
 
         $message = clone $this;
-        if ($oldHeader = $this->headerNames[$header]) {
-            unset($this->headers[$oldHeader]);
+        if (isset($message->headerNames[$header])) {
+            unset($message->headers[$message->headerNames[$header]]);
         }
 
-        $message->headerNames[$header] = $name;
+        $message->headerNames[$header] = $header;
         $message->headers[$header] = $value;
 
         return $message;
@@ -132,7 +133,7 @@ class Message implements MessageInterface
         return $message;
     }
 
-    private function setHeaders(array $headers): void
+    protected function setHeaders(array $headers): void
     {
         foreach ($headers as $header => $value) {
             if (is_integer($header)) {
@@ -141,13 +142,13 @@ class Message implements MessageInterface
 
             (new HeaderValidator())->validate($header, $value);
             $value = (new HeaderTrimmer())->trim($value);
-            $header = mb_strtolower($header);
+            $lowerHeader = mb_strtolower($header);
 
-            if ($this->hasHeader($header)) {
-                $header = $this->headerNames[$header];
+            if ($this->hasHeader($lowerHeader)) {
+                $header = $this->headerNames[$lowerHeader];
                 $this->headers[$header] = array_merge($this->getHeader($header), $value);
             } else {
-                $this->headerNames[$header] = $header;
+                $this->headerNames[$lowerHeader] = $header;
                 $this->headers[$header] = $value;
             }
         }

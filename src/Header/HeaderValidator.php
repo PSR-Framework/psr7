@@ -12,8 +12,12 @@ use function is_numeric;
 
 final class HeaderValidator
 {
-    public function validate(string $header, array $values): void
+    public function validate(string $header, $values): void
     {
+        if (!is_string($header) or !$this->matchHeaderRfc($header)) {
+            throw new InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
+        }
+
         if (!is_array($values)) {
             if (
                 (!is_numeric($values) and !is_string($values))
@@ -21,10 +25,8 @@ final class HeaderValidator
             ) {
                 throw new InvalidArgumentException('Header values must be RFC 7230 compatible strings.');
             }
-        }
 
-        if (!is_string($header) or !$this->matchHeaderRfc($header)) {
-            throw new InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
+            return;
         }
 
         if (empty($values)) {
@@ -41,11 +43,11 @@ final class HeaderValidator
 
     private function matchHeaderRfc(string $header): bool
     {
-        return preg_match("#^[!#$&%'+*.^_`|~0-9A-Za-z-]+$#", $header);
+        return boolval(preg_match("@^[!#$&%'+*.^_`|~0-9A-Za-z-]+$@", $header));
     }
 
     private function matchHeaderValuesRfc(string $values): bool
     {
-        return preg_match("#^[ \t\x21-\x7E\x80-\xFF]*$#", $values);
+        return boolval(preg_match("@^[ \t\x21-\x7E\x80-\xFF]*$@", $values));
     }
 }

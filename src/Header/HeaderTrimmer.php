@@ -8,7 +8,7 @@ use function trim;
 
 final class HeaderTrimmer
 {
-    public function trim(array $values): array
+    public function trim($values): array
     {
         if (!is_array($values)) {
             $stringValues = (string) $values;
