@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7;
+namespace Tests\Arslanoov\Psr7;
 
 use Arslanoov\Psr7\ServerRequest;
 use Arslanoov\Psr7\UploadedFile;
