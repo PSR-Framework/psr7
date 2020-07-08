@@ -71,15 +71,16 @@ class Message implements MessageInterface
     {
         (new HeaderValidator())->validate($name, $value);
         $value = (new HeaderTrimmer())->trim($value);
-        $header = mb_strtolower($name);
+        $lowerHeader = mb_strtolower($name);
 
         $message = clone $this;
-        if (isset($message->headerNames[$header])) {
-            unset($message->headers[$message->headerNames[$header]]);
+
+        if (isset($message->headerNames[$lowerHeader])) {
+            unset($message->headers[$message->headerNames[$lowerHeader]]);
         }
 
-        $message->headerNames[$header] = $header;
-        $message->headers[$header] = $value;
+        $message->headerNames[$lowerHeader] = $name;
+        $message->headers[$name] = $value;
 
         return $message;
     }
@@ -105,11 +106,11 @@ class Message implements MessageInterface
             return $this;
         }
 
-        $header = $this->headerNames[$header];
+        $headerName = $this->headerNames[$header];
 
         $message = clone $this;
 
-        unset($message->headers[$header]);
+        unset($message->headers[$headerName]);
         unset($message->headerNames[$header]);
 
         return $message;
