@@ -13,11 +13,19 @@ class ServerRequestFactoryTest extends TestCase
 {
     public function testCreate(): void
     {
-        $uploadedFile = (new ServerRequestFactory())->createServerRequest('s', '/home', [
+        $serverRequest = (new ServerRequestFactory())->createServerRequest('s', '/home', [
             'foo' => 'bar'
         ]);
 
-        $this->assertInstanceOf(ServerRequestInterface::class, $uploadedFile);
-        $this->assertInstanceOf(ServerRequest::class, $uploadedFile);
+        $this->assertInstanceOf(ServerRequestInterface::class, $serverRequest);
+        $this->assertInstanceOf(ServerRequest::class, $serverRequest);
+    }
+
+    public function testFromGlobals(): void
+    {
+        $serverRequest = (new ServerRequestFactory)->fromGlobals();
+
+        $this->assertInstanceOf(ServerRequestInterface::class, $serverRequest);
+        $this->assertInstanceOf(ServerRequest::class, $serverRequest);
     }
 }

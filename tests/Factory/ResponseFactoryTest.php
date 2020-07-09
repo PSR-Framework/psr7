@@ -13,14 +13,14 @@ class ResponseFactoryTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $request =
+        $response =
             (new ResponseFactory())
             ->createResponse($code = 500, $message = 'error')
         ;
 
-        $this->assertInstanceOf(Response::class, $request);
-        $this->assertInstanceOf(ResponseInterface::class, $request);
-        $this->assertSame($request->getStatusCode(), $code);
-        $this->assertSame($request->getReasonPhrase(), $message);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+        $this->assertSame($response->getStatusCode(), $code);
+        $this->assertSame($response->getReasonPhrase(), $message);
     }
 }

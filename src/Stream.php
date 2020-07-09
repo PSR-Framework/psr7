@@ -62,6 +62,13 @@ final class Stream implements StreamInterface
             $body = $resource;
         }
 
+        if (is_array($body)) {
+            $body = json_encode($body);
+            $resource = fopen('php://temp', 'rw+');
+            fwrite($resource, $body);
+            $body = $resource;
+        }
+
         if (is_resource($body)) {
             $new = new self();
             $new->stream = $body;
@@ -74,7 +81,7 @@ final class Stream implements StreamInterface
             return $new;
         }
 
-        throw new InvalidArgumentException('Body must be a string, resource or an instance of StreamInterface.');
+        throw new InvalidArgumentException('Body must be a string, array, instance of StreamInterface or null');
     }
 
     public function __toString()

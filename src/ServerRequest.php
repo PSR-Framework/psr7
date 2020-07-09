@@ -6,10 +6,10 @@ namespace Arslanoov\Psr7;
 
 use Arslanoov\Psr7\Exception\InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;
 use function array_key_exists;
 use function is_array;
-use function is_object;
 
 final class ServerRequest extends Request implements ServerRequestInterface
 {
@@ -19,16 +19,24 @@ final class ServerRequest extends Request implements ServerRequestInterface
     private array $uploadedFiles = [];
     private array $attributes = [];
     private array $serverParams;
-    /** @var array|object|null */
+    /** @var array|object|string|null */
     private $parsedBody;
 
     public function __construct(
-        string $method, $uri, array $headers = [], $body = null,
-        string $version = '1.1', array $serverParams = []
+        string $method, $uri, string $version = '1.1', array $headers = [],
+        array $queryParams = [], $body = null,
+        array $serverParams = [], array $cookieParams = [],
+        array $files = [], array $attributes = []
     )
     {
         parent::__construct($method, $uri, $headers, $body, $version);
+        $this->queryParams = $queryParams;
+        $this->validateBody($body);
+        $this->parsedBody = $body;
         $this->serverParams = $serverParams;
+        $this->cookieParams = $cookieParams;
+        $this->uploadedFiles =  $files;
+        $this->attributes = $attributes;
     }
     
     // Get
@@ -115,12 +123,17 @@ final class ServerRequest extends Request implements ServerRequestInterface
 
     public function withParsedBody($data)
     {
-        if (!is_array($data) and !is_object($data) and null !== $data) {
-            throw new InvalidArgumentException('First parameter must be object, array or null');
-        }
+        $this->validateBody($data);
 
         $serverRequest = clone $this;
         $serverRequest->parsedBody = $data;
         return $serverRequest;
+    }
+
+    private function validateBody($body): void
+    {
+        if (null !== $body and !is_array($body) and !is_string($body) and !$body instanceof StreamInterface) {
+            throw new InvalidArgumentException('Body must be a string, array, instance of StreamInterface or null');
+        }
     }
 }
