@@ -14,7 +14,7 @@ class Request extends Message implements RequestInterface
 {
     private string $method;
     private ?string $requestTarget = null;
-    private ?UriInterface $uri = null;
+    private UriInterface $uri;
 
     public function  __construct(string $method, $uri, array $headers = [], $body = null, string $version = '1.1')
     {

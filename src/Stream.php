@@ -9,6 +9,7 @@ use Arslanoov\Psr7\Exception\InvalidArgumentException;
 use Arslanoov\Psr7\Exception\NotReadableStreamException;
 use Arslanoov\Psr7\Exception\NotSeekableStreamException;
 use Arslanoov\Psr7\Exception\NotWritableStreamException;
+use Arslanoov\Psr7\Exception\RuntimeException;
 use Arslanoov\Psr7\Exception\UnableToSeekException;
 use Psr\Http\Message\StreamInterface;
 use const SEEK_CUR;
@@ -59,13 +60,16 @@ class Stream implements StreamInterface
         if (is_string($body)) {
             if ($body === 'php://input') {
                 $resource = fopen('php://input', 'rw+');
-                fwrite($resource, $body);
-                $body = $resource;
             } else {
                 $resource = fopen('php://temp', 'rw+');
-                fwrite($resource, $body);
-                $body = $resource;
             }
+
+            if (false === $resource) {
+                throw new RuntimeException('Could not open file');
+            }
+
+            fwrite($resource, $body);
+            $body = $resource;
         }
 
         if (is_array($body)) {

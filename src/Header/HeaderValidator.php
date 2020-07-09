@@ -14,7 +14,7 @@ final class HeaderValidator
 {
     public function validate(string $header, $values): void
     {
-        if (!is_string($header) or !$this->matchHeaderRfc($header)) {
+        if (!$this->matchHeaderRfc($header)) {
             throw new InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
         }
 
