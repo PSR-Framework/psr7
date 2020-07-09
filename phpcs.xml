@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset>
-    <rule ref="PSR7"/>
+    <rule ref="PSR1"/>
     <file>src</file>
     <file>tests</file>
 </ruleset>
