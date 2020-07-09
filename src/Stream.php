@@ -244,7 +244,7 @@ class Stream implements StreamInterface
     }
 
     /**
-     * @param null $key
+     * @param string $key
      * @return array|mixed|null
      */
     public function getMetadata($key = null)
