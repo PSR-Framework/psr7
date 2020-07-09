@@ -75,6 +75,11 @@ class Stream implements StreamInterface
         if (is_array($body)) {
             $body = json_encode($body);
             $resource = fopen('php://temp', 'rw+');
+
+            if (false === $resource) {
+                throw new RuntimeException('Could not open file');
+            }
+
             fwrite($resource, $body);
             $body = $resource;
         }
