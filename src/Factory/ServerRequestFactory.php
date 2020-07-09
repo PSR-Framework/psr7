@@ -23,7 +23,7 @@ final class ServerRequestFactory implements ServerRequestFactoryInterface
         $uri = $_SERVER['REQUEST_URI'] ?? '';
         $protocolVersion = (new Protocol())->getVersion($_SERVER);
         $headers = (new HeadersCollection($_SERVER))->get();
-        $body = $_POST ?? file_get_contents('php://input');
+        $body = $_POST ?? 'php://input';
 
         return new ServerRequest(
             $method,

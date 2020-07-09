@@ -25,7 +25,7 @@ use function ftell;
 use function feof;
 use function stream_get_contents;
 
-final class Stream implements StreamInterface
+class Stream implements StreamInterface
 {
     private bool $seekable;
     private bool $readable;
@@ -57,9 +57,15 @@ final class Stream implements StreamInterface
         }
 
         if (is_string($body)) {
-            $resource = fopen('php://temp', 'rw+');
-            fwrite($resource, $body);
-            $body = $resource;
+            if ($body === 'php://input') {
+                $resource = fopen('php://input', 'rw+');
+                fwrite($resource, $body);
+                $body = $resource;
+            } else {
+                $resource = fopen('php://temp', 'rw+');
+                fwrite($resource, $body);
+                $body = $resource;
+            }
         }
 
         if (is_array($body)) {
@@ -81,7 +87,7 @@ final class Stream implements StreamInterface
             return $new;
         }
 
-        throw new InvalidArgumentException('Body must be a string, array, instance of StreamInterface or null');
+        throw new InvalidArgumentException('Body must be array, instance of StreamInterface or null');
     }
 
     public function __toString()

@@ -16,7 +16,7 @@ class Request extends Message implements RequestInterface
     private ?string $requestTarget = null;
     private ?UriInterface $uri = null;
 
-    public function __construct(string $method, $uri, array $headers = [], $body = null, string $version = '1.1')
+    public function  __construct(string $method, $uri, array $headers = [], $body = null, string $version = '1.1')
     {
         if (!($uri instanceof UriInterface)) {
             $uri = new Uri($uri);

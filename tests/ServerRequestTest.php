@@ -8,51 +8,29 @@ use Arslanoov\Psr7\Exception\InvalidArgumentException;
 use Arslanoov\Psr7\ServerRequest;
 use Arslanoov\Psr7\UploadedFile;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\StreamInterface;
 
 class ServerRequestTest extends TestCase
 {
-    public function testQueryParams(): void
-    {
-        $firstRequest = new ServerRequest('GET', '/');
-
-        $params = ['foo' => 'bar'];
-
-        $secondRequest = $firstRequest->withQueryParams($params);
-
-        $this->assertNotSame($secondRequest, $firstRequest);
-        $this->assertEmpty($firstRequest->getQueryParams());
-        $this->assertSame($params, $secondRequest->getQueryParams());
-    }
-
-    // Parsed body
-
-    public function testConstructorArrayParsedBody(): void
-    {
-        $body = ['foo' => 'bar'];
-        $request = new ServerRequest('GET', '/', '1.1', [], [], $body);
-
-        $this->assertEquals($request->getParsedBody(), $body);
-    }
-
     public function testConstructorStringParsedBody(): void
     {
         $body = '{"foo": "bar"}';
         $request = new ServerRequest('GET', '/', '1.1', [], [], $body);
-;
-        $this->assertEquals($request->getParsedBody(), $body);
+
+        $this->assertInstanceOf(StreamInterface::class, $request->getParsedBody());
     }
 
     public function testConstructorNullParsedBody(): void
     {
         $request = new ServerRequest('GET', '/', '1.1', [], [], null);
-        ;
+
         $this->assertNull($request->getParsedBody());
     }
 
     public function testConstructorErrorParsedBody(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Body must be a string, array, instance of StreamInterface or null');
+        $this->expectExceptionMessage('Body must be array, instance of StreamInterface or null');
 
         new ServerRequest('GET', '/', '1.1', [], [], true);
     }
@@ -74,7 +52,7 @@ class ServerRequestTest extends TestCase
             ->withParsedBody($body = '{"foo": "bar"}')
         ;
 
-        $this->assertEquals($request->getParsedBody(), $body);
+        $this->assertInstanceOf(StreamInterface::class, $request->getParsedBody());
     }
 
     public function testWithNullParsedBody(): void
@@ -92,7 +70,7 @@ class ServerRequestTest extends TestCase
         $request = new ServerRequest('GET', '/', '1.1');
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Body must be a string, array, instance of StreamInterface or null');
+        $this->expectExceptionMessage('Body must be array, instance of StreamInterface or null');
 
         $request
             ->withParsedBody(true)

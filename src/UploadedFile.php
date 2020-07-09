@@ -30,7 +30,7 @@ use const UPLOAD_ERR_PARTIAL;
 final class UploadedFile implements UploadedFileInterface
 {
     private int $error;
-    private int $size;
+    private ?int $size;
     private bool $moved = false;
     private ?string $file = null;
     private ?string $clientFileName = null;
@@ -49,7 +49,7 @@ final class UploadedFile implements UploadedFileInterface
     ];
 
     public function __construct(
-        $streamOrFile, int $size, int $error,
+        $streamOrFile, ?int $size, int $error,
         string $clientFileName = null, string $clientMediaType = null
     )
     {
@@ -82,7 +82,7 @@ final class UploadedFile implements UploadedFileInterface
 
     // Get
 
-    public function getSize(): int
+    public function getSize(): ?int
     {
         return $this->size;
     }

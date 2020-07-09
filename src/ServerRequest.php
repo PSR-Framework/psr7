@@ -19,7 +19,7 @@ final class ServerRequest extends Request implements ServerRequestInterface
     private array $uploadedFiles = [];
     private array $attributes = [];
     private array $serverParams;
-    /** @var array|object|string|null */
+    /** @var array|object|null */
     private $parsedBody;
 
     public function __construct(
@@ -30,6 +30,9 @@ final class ServerRequest extends Request implements ServerRequestInterface
     )
     {
         parent::__construct($method, $uri, $headers, $body, $version);
+        if (is_string($body)) {
+            $body = Stream::new($body);
+        }
         $this->queryParams = $queryParams;
         $this->validateBody($body);
         $this->parsedBody = $body;
@@ -123,6 +126,10 @@ final class ServerRequest extends Request implements ServerRequestInterface
 
     public function withParsedBody($data)
     {
+        if (is_string($data)) {
+            $data = Stream::new($data);
+        }
+
         $this->validateBody($data);
 
         $serverRequest = clone $this;
@@ -132,8 +139,8 @@ final class ServerRequest extends Request implements ServerRequestInterface
 
     private function validateBody($body): void
     {
-        if (null !== $body and !is_array($body) and !is_string($body) and !$body instanceof StreamInterface) {
-            throw new InvalidArgumentException('Body must be a string, array, instance of StreamInterface or null');
+        if (null !== $body and !is_array($body) and !$body instanceof StreamInterface) {
+            throw new InvalidArgumentException('Body must be array, instance of StreamInterface or null');
         }
     }
 }
