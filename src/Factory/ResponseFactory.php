@@ -34,6 +34,14 @@ final class ResponseFactory implements ResponseFactoryInterface
             ;
     }
 
+    public function createTextResponse(string $text, int $code = 200, string $reasonPhrase = ''): ResponseInterface
+    {
+        return
+            (new Response\TextResponse($text))
+                ->withStatus($code, $reasonPhrase)
+            ;
+    }
+
     public function createEmptyResponse(): ResponseInterface
     {
         return (new Response\EmptyResponse());

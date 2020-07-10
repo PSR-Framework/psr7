@@ -45,4 +45,15 @@ class ResponseFactoryTest extends TestCase
         $this->assertInstanceOf(Response\XmlResponse::class, $response);
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
+
+    public function testText(): void
+    {
+        $response =
+            (new ResponseFactory())
+                ->createTextResponse('Hello!!!')
+        ;
+
+        $this->assertInstanceOf(Response\TextResponse::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+    }
 }
