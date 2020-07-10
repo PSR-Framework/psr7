@@ -25,7 +25,7 @@ class Request extends Message implements RequestInterface
         if (!($uri instanceof UriInterface)) {
             $uri = new Uri($uri);
         }
-        if (!is_string($method) or !$this->isValidMethod($method)) {
+        if (!$this->isValidMethod($method)) {
             throw new InvalidArgumentException('Unsupported HTTP method');
         }
 

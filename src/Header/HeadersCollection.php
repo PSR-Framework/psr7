@@ -7,7 +7,6 @@ namespace Arslanoov\Psr7\Header;
 final class HeadersCollection
 {
     private array $serverParameters;
-    private array $headers = [];
 
     /**
      * HeadersCollection constructor.
