@@ -33,4 +33,9 @@ final class ResponseFactory implements ResponseFactoryInterface
                 ->withStatus($code, $reasonPhrase)
             ;
     }
+
+    public function createEmptyResponse(): ResponseInterface
+    {
+        return (new Response\EmptyResponse());
+    }
 }
