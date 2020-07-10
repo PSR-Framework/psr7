@@ -34,4 +34,15 @@ class ResponseFactoryTest extends TestCase
         $this->assertInstanceOf(Response\JsonResponse::class, $response);
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
+
+    public function testXml(): void
+    {
+        $response =
+            (new ResponseFactory())
+                ->createXmlResponse('<hello>Hello!!!</hello>')
+        ;
+
+        $this->assertInstanceOf(Response\XmlResponse::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+    }
 }
