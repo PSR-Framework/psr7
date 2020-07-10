@@ -46,6 +46,17 @@ class ResponseFactoryTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 
+    public function testEmpty(): void
+    {
+        $response =
+            (new ResponseFactory())
+                ->createEmptyResponse()
+        ;
+
+        $this->assertInstanceOf(Response\EmptyResponse::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+    }
+
     public function testText(): void
     {
         $response =
@@ -54,6 +65,17 @@ class ResponseFactoryTest extends TestCase
         ;
 
         $this->assertInstanceOf(Response\TextResponse::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+    }
+
+    public function testHtml(): void
+    {
+        $response =
+            (new ResponseFactory())
+                ->createHtmlResponse('<html>Some html</html>')
+        ;
+
+        $this->assertInstanceOf(Response\HtmlResponse::class, $response);
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 }
