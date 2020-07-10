@@ -6,11 +6,9 @@ namespace Arslanoov\Psr7;
 
 use Arslanoov\Psr7\Header\HeaderTrimmer;
 use Arslanoov\Psr7\Header\HeaderValidator;
-use Arslanoov\Psr7\Stream;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
 use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use function in_array;
 use function mb_strtolower;
 use function implode;
 use function is_integer;

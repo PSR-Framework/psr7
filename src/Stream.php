@@ -53,39 +53,21 @@ class Stream implements StreamInterface
 
     public static function new($body = ''): StreamInterface
     {
+        $new = new self();
+
         if ($body instanceof StreamInterface) {
             return $body;
         }
 
         if (is_string($body)) {
-            if ($body === 'php://input') {
-                $resource = fopen('php://input', 'rw+');
-            } else {
-                $resource = fopen('php://temp', 'rw+');
-            }
-
-            if (false === $resource) {
-                throw new RuntimeException('Could not open file');
-            }
-
-            fwrite($resource, $body);
-            $body = $resource;
+            $body = $new->initializeAsString($body);
         }
 
         if (is_array($body)) {
-            $body = json_encode($body);
-            $resource = fopen('php://temp', 'rw+');
-
-            if (false === $resource) {
-                throw new RuntimeException('Could not open file');
-            }
-
-            fwrite($resource, $body);
-            $body = $resource;
+            $body = $new->initializeAsArray($body);
         }
 
         if (is_resource($body)) {
-            $new = new self();
             $new->stream = $body;
             $meta = stream_get_meta_data($new->stream);
             $new->seekable = $meta['seekable'] and !fseek($new->stream, 0, SEEK_CUR);
@@ -97,6 +79,35 @@ class Stream implements StreamInterface
         }
 
         throw new InvalidArgumentException('Body must be array, instance of StreamInterface or null');
+    }
+
+    private function initializeAsString(string $body)
+    {
+        if ($body === 'php://input') {
+            $resource = fopen('php://input', 'rw+');
+        } else {
+            $resource = fopen('php://temp', 'rw+');
+        }
+
+        if (false === $resource) {
+            throw new RuntimeException('Could not open file');
+        }
+
+        fwrite($resource, $body);
+        return $resource;
+    }
+
+    private function initializeAsArray(array $body)
+    {
+        $body = json_encode($body);
+        $resource = fopen('php://temp', 'rw+');
+
+        if (false === $resource) {
+            throw new RuntimeException('Could not open file');
+        }
+
+        fwrite($resource, $body);
+        return $resource;
     }
 
     public function __toString()

@@ -37,16 +37,7 @@ final class UriBuilder
         $builder = clone $this;
 
         if ('' !== $path) {
-            if ('/' !== $path[0]) {
-                if ('' !== $authority) {
-                    $path = '/' . $path;
-                }
-            } elseif (isset($path[1]) and '/' === $path[1]) {
-                if ('' === $authority) {
-                    $path = '/' . ltrim($path, '/');
-                }
-            }
-
+            $path = $this->buildPathByAuthority($path, $authority);
             $builder->uri .= $path;
         }
 
@@ -81,5 +72,22 @@ final class UriBuilder
     public function getUri(): string
     {
         return $this->uri;
+    }
+
+    private function buildPathByAuthority(string $path, string $authority): string
+    {
+        $newPath = $path;
+
+        if ('/' !== $path[0]) {
+            if ('' !== $authority) {
+                $newPath = '/' . $path;
+            }
+        } elseif (isset($path[1]) and '/' === $path[1]) {
+            if ('' === $authority) {
+                $newPath = '/' . ltrim($path, '/');
+            }
+        }
+
+        return $newPath;
     }
 }

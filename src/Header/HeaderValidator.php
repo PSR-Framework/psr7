@@ -14,32 +14,47 @@ final class HeaderValidator
 {
     public function validate(string $header, $values): void
     {
-        if (!$this->matchHeaderRfc($header)) {
-            throw new InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
-        }
+        $this->validateHeaderMatchRfc($header);
 
         if (!is_array($values)) {
-            if (
-                (!is_numeric($values) and !is_string($values))
-                or !$this->matchHeaderValuesRfc((string) $values)
-            ) {
-                throw new InvalidArgumentException('Header values must be RFC 7230 compatible strings.');
-            }
-
+            $this->validateHeaderValueMatchRfc($values);
             return;
         }
 
+        $this->validateHeaderValuesEmpty($values);
+
+        foreach ($values as $value) {
+            $this->validateHeaderValueMatchRfc($value);
+        }
+    }
+
+    // Validate
+
+    private function validateHeaderMatchRfc(string $header): void
+    {
+        if (!$this->matchHeaderRfc($header)) {
+            throw new InvalidArgumentException('Header name must be an RFC 7230 compatible string.');
+        }
+    }
+
+    private function validateHeaderValueMatchRfc($value): void
+    {
+        if (
+            (!is_numeric($value) and !is_string($value))
+            or !$this->matchHeaderValuesRfc((string) $value)
+        ) {
+            throw new InvalidArgumentException('Header values must be RFC 7230 compatible strings.');
+        }
+    }
+
+    private function validateHeaderValuesEmpty($values): void
+    {
         if (empty($values)) {
             throw new InvalidArgumentException('Header values must be a string or an array of strings, empty array given.');
         }
-
-        foreach ($values as $value) {
-            if ((!is_numeric($value) and !is_string($value))
-                or !$this->matchHeaderValuesRfc((string) $value)) {
-                throw new InvalidArgumentException('Header values must be RFC 7230 compatible strings.');
-            }
-        }
     }
+
+    // Match
 
     private function matchHeaderRfc(string $header): bool
     {

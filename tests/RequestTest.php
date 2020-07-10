@@ -89,10 +89,18 @@ class RequestTest extends TestCase
     {
         $firstRequest = new Request('GET', '/');
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Method must be a string');
+        $this->expectExceptionMessage('Unsupported HTTP method');
 
         $firstRequest
             ->withMethod($method = true);
+    }
+
+    public function testWithMethodInvalid(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unsupported HTTP method');
+
+        new Request('Some invalid method', '/');
     }
 
     public function testWithRequestTarget(): void

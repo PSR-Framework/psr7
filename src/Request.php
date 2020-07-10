@@ -12,6 +12,10 @@ use function preg_match;
 
 class Request extends Message implements RequestInterface
 {
+    private const METHODS = [
+        'GET', 'POST', 'PUT', 'PATCH', 'DELETE'
+    ];
+
     private string $method;
     private ?string $requestTarget = null;
     private UriInterface $uri;
@@ -20,6 +24,9 @@ class Request extends Message implements RequestInterface
     {
         if (!($uri instanceof UriInterface)) {
             $uri = new Uri($uri);
+        }
+        if (!is_string($method) or !$this->isValidMethod($method)) {
+            throw new InvalidArgumentException('Unsupported HTTP method');
         }
 
         $this->method = $method;
@@ -82,8 +89,8 @@ class Request extends Message implements RequestInterface
 
     public function withMethod($method): self
     {
-        if (!is_string($method)) {
-            throw new InvalidArgumentException('Method must be a string');
+        if (!is_string($method) or !$this->isValidMethod($method)) {
+            throw new InvalidArgumentException('Unsupported HTTP method');
         }
 
         $request = clone $this;
@@ -131,5 +138,10 @@ class Request extends Message implements RequestInterface
     private function containWhitespace(string $requestTarget): bool
     {
         return boolval(preg_match('#\s#', $requestTarget));
+    }
+
+    private function isValidMethod(string $method): bool
+    {
+        return in_array($method, self::METHODS);
     }
 }

@@ -16,12 +16,17 @@ final class HeaderTrimmer
             return [$trimmedValues];
         }
 
-        $returnValues = [];
+        return $this->trimHeaderValues($values);
+    }
+
+    private function trimHeaderValues(array $values): array
+    {
+        $trimmedValues = [];
         foreach ($values as $value) {
-            $returnValues[] = $this->trimHeaderValue($value);
+            $trimmedValues[] = $this->trimHeaderValue((string) $value);
         }
 
-        return $values;
+        return $trimmedValues;
     }
 
     private function trimHeaderValue(string $value): string

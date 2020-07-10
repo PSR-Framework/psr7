@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace tests\Arslanoov\Psr7;
 
+use Arslanoov\Psr7\Exception\InvalidArgumentException;
 use Arslanoov\Psr7\Response;
 use Arslanoov\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
@@ -31,9 +32,9 @@ class ResponseTest extends TestCase
 
     public function testConstructUndefinedStatusCode(): void
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Status code has to be an integer between 100 and 599');
         $firstResponse = new Response(999);
-        $this->assertSame(999, $firstResponse->getStatusCode());
-        $this->assertSame('', $firstResponse->getReasonPhrase());
     }
 
     public function testConstructEmptyReason(): void

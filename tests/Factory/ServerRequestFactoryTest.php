@@ -13,7 +13,7 @@ class ServerRequestFactoryTest extends TestCase
 {
     public function testCreate(): void
     {
-        $serverRequest = (new ServerRequestFactory())->createServerRequest('s', '/home', [
+        $serverRequest = (new ServerRequestFactory())->createServerRequest('GET', '/home', [
             'foo' => 'bar'
         ]);
 

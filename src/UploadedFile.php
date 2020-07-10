@@ -68,15 +68,20 @@ final class UploadedFile implements UploadedFileInterface
         $this->clientMediaType = $clientMediaType;
 
         if (UPLOAD_ERR_OK === $this->error) {
-            if (is_string($streamOrFile)) {
-                $this->file = $streamOrFile;
-            } elseif (is_resource($streamOrFile)) {
-                $this->stream = Stream::new($streamOrFile);
-            } elseif ($streamOrFile instanceof StreamInterface) {
-                $this->stream = $streamOrFile;
-            } else {
-                throw new InvalidArgumentException('Invalid stream or file provided for UploadedFile');
-            }
+            $this->initializeStream($streamOrFile);
+        }
+    }
+
+    private function initializeStream($streamOrFile): void
+    {
+        if (is_string($streamOrFile)) {
+            $this->file = $streamOrFile;
+        } elseif (is_resource($streamOrFile)) {
+            $this->stream = Stream::new($streamOrFile);
+        } elseif ($streamOrFile instanceof StreamInterface) {
+            $this->stream = $streamOrFile;
+        } else {
+            throw new InvalidArgumentException('Invalid stream or file provided for UploadedFile');
         }
     }
 
@@ -126,7 +131,7 @@ final class UploadedFile implements UploadedFileInterface
         }
 
         if (null !== $this->file) {
-            $this->moved = 'cli' === PHP_SAPI ? rename($this->file, $targetPath) : move_uploaded_file($this->file, $targetPath);
+            $this->setIsMovedByFile($targetPath);
         } else {
             $stream = $this->getStream();
             if ($stream->isSeekable()) {
@@ -137,9 +142,7 @@ final class UploadedFile implements UploadedFileInterface
             $this->moved = true;
         }
 
-        if (false === $this->moved) {
-            throw new RuntimeException(sprintf('Uploaded file could not be moved to %s', $targetPath));
-        }
+        $this->validateIsMoved($targetPath);
     }
 
     /**
@@ -163,6 +166,13 @@ final class UploadedFile implements UploadedFileInterface
         }
     }
 
+    private function validateIsMoved(string $targetPath): void
+    {
+        if (false === $this->moved) {
+            throw new RuntimeException(sprintf('Uploaded file could not be moved to %s', $targetPath));
+        }
+    }
+
     // Copy
 
     private function copyStreamContent(StreamInterface $stream, string $targetPath): void
@@ -172,6 +182,15 @@ final class UploadedFile implements UploadedFileInterface
             if (!$dest->write($stream->read(1048576))) {
                 break;
             }
+        }
+    }
+
+    private function setIsMovedByFile($targetPath): void
+    {
+        if ('cli' === PHP_SAPI) {
+            $this->moved = rename($this->file, $targetPath);
+        } else {
+            $this->moved = move_uploaded_file($this->file, $targetPath);
         }
     }
 }

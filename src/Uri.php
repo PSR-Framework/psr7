@@ -14,6 +14,17 @@ use function is_string;
 
 final class Uri implements UriInterface
 {
+    private const PARTS_PATTERN = [
+        'user' => '',
+        'scheme' => '',
+        'host' => '',
+        'port' => null,
+        'path' => '',
+        'query' => '',
+        'fragment' => '',
+        'pass' => null
+    ];
+
     private UriFilter $filter;
     private string $scheme = '';
     private string $userInfo = '';
@@ -32,19 +43,15 @@ final class Uri implements UriInterface
                 throw new UnableToParseUriException($uri);
             }
 
-            $this->userInfo = $parts['user'] ?? '';
-            $this->scheme =
-                isset($parts['scheme']) ? mb_strtolower($parts['scheme']) : '';
-            $this->host =
-                isset($parts['host']) ? mb_strtolower($parts['host']) : '';
-            $this->port =
-                isset($parts['port']) ? $this->filter->filterPort($this->scheme, $parts['port']) : null;
-            $this->path =
-                isset($parts['path']) ? $this->filter->filterPath($parts['path']) : '';
-            $this->query =
-                isset($parts['query']) ? $this->filter->filterQuery($parts['query']) : '';
-            $this->fragment =
-                isset($parts['fragment']) ? $this->filter->filterFragment($parts['fragment']) : '';
+            $parts = $parts + self::PARTS_PATTERN;
+
+            $this->userInfo = $parts['user'];
+            $this->scheme = mb_strtolower($parts['scheme']);
+            $this->host = mb_strtolower($parts['host']);
+            $this->port = $this->filter->filterPort($this->scheme, $parts['port']);
+            $this->path = $this->filter->filterPath($parts['path']);
+            $this->query = $this->filter->filterQuery($parts['query']);
+            $this->fragment = $this->filter->filterFragment($parts['fragment']);
 
             if (isset($parts['pass'])) {
                 $this->userInfo .= ':' . $parts['pass'];

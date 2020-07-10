@@ -24,15 +24,20 @@ final class Response extends Message implements ResponseInterface
             $this->stream = Stream::new($body);
         }
 
+        $this->validateStatusCode($statusCode);
         $this->statusCode = $statusCode;
         $this->setHeaders($headers);
+        $this->initializeReasonPhrase($reason);
+        $this->protocolVersion = $version;
+    }
+
+    private function initializeReasonPhrase(?string $reason): void
+    {
         if (null === $reason and isset(Phrases::LIST[$this->statusCode])) {
-            $this->reasonPhrase = Phrases::LIST[$statusCode];
+            $this->reasonPhrase = Phrases::LIST[$this->statusCode];
         } else {
             $this->reasonPhrase = $reason ?? '';
         }
-
-        $this->protocolVersion = $version;
     }
 
     // Get
@@ -51,14 +56,7 @@ final class Response extends Message implements ResponseInterface
 
     public function withStatus($code, $reasonPhrase = ''): self
     {
-        if (!is_int($code) and !is_string($code)) {
-            throw new InvalidArgumentException('Status code has to be an integer');
-        }
-
-        $code = (int) $code;
-        if ($code < 100 or $code > 599) {
-            throw new InvalidArgumentException('Status code has to be an integer between 100 and 599');
-        }
+        $this->validateStatusCode($code);
 
         $response = clone $this;
         $response->statusCode = $code;
@@ -72,5 +70,16 @@ final class Response extends Message implements ResponseInterface
 
         $response->reasonPhrase = $reasonPhrase;
         return $response;
+    }
+
+    private function validateStatusCode($code): void
+    {
+        if (!is_int($code) and !is_string($code)) {
+            throw new InvalidArgumentException('Status code has to be an integer');
+        }
+
+        if ($code < 100 or $code > 599) {
+            throw new InvalidArgumentException('Status code has to be an integer between 100 and 599');
+        }
     }
 }

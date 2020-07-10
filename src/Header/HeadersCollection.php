@@ -7,6 +7,7 @@ namespace Arslanoov\Psr7\Header;
 final class HeadersCollection
 {
     private array $serverParameters;
+    private array $headers = [];
 
     /**
      * HeadersCollection constructor.
@@ -25,27 +26,45 @@ final class HeadersCollection
                 continue;
             }
 
-            if (strpos($key, 'REDIRECT_') === 0) {
-                $key = substr($key, 9);
-
-                if (array_key_exists($key, $this->serverParameters)) {
-                    continue;
-                }
-            }
-
-            if (strpos($key, 'CONTENT_') === 0) {
-                $name = strtr(strtolower($key), '_', '-');
+            if ($name = $this->getHeaderName($key)) {
                 $headers[$name] = $value;
-                continue;
-            }
-
-            if (strpos($key, 'HTTP_') === 0) {
-                $name = strtr(strtolower(substr($key, 5)), '_', '-');
-                $headers[$name] = $value;
-                continue;
             }
         }
 
         return $headers;
+    }
+
+    private function getHeaderName(string $key): ?string
+    {
+        $name = null;
+
+        if ($this->isRedirectHeader($key)) {
+            $key = substr($key, 9);
+        }
+
+        if ($this->isContentHeader($key)) {
+            $name = strtr(strtolower($key), '_', '-');
+        }
+
+        if ($this->isHttpHeader($key)) {
+            $name = strtr(strtolower(substr($key, 5)), '_', '-');
+        }
+
+        return $name;
+    }
+
+    private function isRedirectHeader(string $key): bool
+    {
+        return strpos($key, 'REDIRECT_') === 0;
+    }
+
+    private function isContentHeader(string $key): bool
+    {
+        return strpos($key, 'CONTENT_') === 0;
+    }
+
+    private function isHttpHeader(string $key): bool
+    {
+        return strpos($key, 'HTTP_') === 0;
     }
 }
