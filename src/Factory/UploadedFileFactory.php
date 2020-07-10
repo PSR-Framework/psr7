@@ -10,7 +10,7 @@ use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UploadedFileInterface;
 use const UPLOAD_ERR_OK;
 
-final class UploadedFileFactory implements UploadedFileFactoryInterface
+class UploadedFileFactory implements UploadedFileFactoryInterface
 {
     public function createUploadedFile(
         StreamInterface $stream, ?int $size = null, int $error = UPLOAD_ERR_OK,

@@ -8,7 +8,7 @@ use Arslanoov\Psr7\Request;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 
-final class RequestFactory implements RequestFactoryInterface
+class RequestFactory implements RequestFactoryInterface
 {
     public function createRequest(string $method, $uri): RequestInterface
     {

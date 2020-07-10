@@ -27,7 +27,7 @@ use const UPLOAD_ERR_NO_TMP_DIR;
 use const UPLOAD_ERR_OK;
 use const UPLOAD_ERR_PARTIAL;
 
-final class UploadedFile implements UploadedFileInterface
+class UploadedFile implements UploadedFileInterface
 {
     private int $error;
     private ?int $size;

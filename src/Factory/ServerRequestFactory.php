@@ -10,7 +10,7 @@ use Arslanoov\Psr7\ServerRequest;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class ServerRequestFactory implements ServerRequestFactoryInterface
+class ServerRequestFactory implements ServerRequestFactoryInterface
 {
     public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {

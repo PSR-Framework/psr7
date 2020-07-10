@@ -11,7 +11,7 @@ use Psr\Http\Message\UploadedFileInterface;
 use function array_key_exists;
 use function is_array;
 
-final class ServerRequest extends Request implements ServerRequestInterface
+class ServerRequest extends Request implements ServerRequestInterface
 {
     private array $queryParams = [];
     private array $cookieParams = [];
