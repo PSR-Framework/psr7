@@ -78,4 +78,15 @@ class ResponseFactoryTest extends TestCase
         $this->assertInstanceOf(Response\HtmlResponse::class, $response);
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
+
+    public function testRedirect(): void
+    {
+        $response =
+            (new ResponseFactory())
+                ->createRedirectResponse($uri = 'http://somesite.com')
+        ;
+
+        $this->assertInstanceOf(Response\RedirectResponse::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
+    }
 }
