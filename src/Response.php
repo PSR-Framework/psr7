@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use function is_int;
 use function is_string;
 
-final class Response extends Message implements ResponseInterface
+class Response extends Message implements ResponseInterface
 {
     private int $statusCode;
     private string $reasonPhrase = '';

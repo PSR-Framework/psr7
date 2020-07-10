@@ -17,4 +17,12 @@ final class ResponseFactory implements ResponseFactoryInterface
             ->withStatus($code, $reasonPhrase)
         ;
     }
+
+    public function createJsonResponse(array $data, int $code = 200, string $reasonPhrase = ''): ResponseInterface
+    {
+        return
+                (new Response\JsonResponse($data))
+                ->withStatus($code, $reasonPhrase)
+            ;
+    }
 }

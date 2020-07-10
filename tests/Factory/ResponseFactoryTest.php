@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class ResponseFactoryTest extends TestCase
 {
-    public function testSuccess(): void
+    public function testDefault(): void
     {
         $response =
             (new ResponseFactory())
@@ -22,5 +22,16 @@ class ResponseFactoryTest extends TestCase
         $this->assertInstanceOf(ResponseInterface::class, $response);
         $this->assertSame($response->getStatusCode(), $code);
         $this->assertSame($response->getReasonPhrase(), $message);
+    }
+
+    public function testJson(): void
+    {
+        $response =
+            (new ResponseFactory())
+            ->createJsonResponse([])
+        ;
+
+        $this->assertInstanceOf(Response\JsonResponse::class, $response);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 }
