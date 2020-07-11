@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Factory;
+namespace Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Uri;
+use Furious\Psr7\Uri;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 

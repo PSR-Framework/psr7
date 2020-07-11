@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Response;
+namespace tests\Furious\Psr7\Response;
 
-use Arslanoov\Psr7\Response\EmptyResponse;
+use Furious\Psr7\Response\EmptyResponse;
 use PHPUnit\Framework\TestCase;
 
 class EmptyResponseTest extends TestCase

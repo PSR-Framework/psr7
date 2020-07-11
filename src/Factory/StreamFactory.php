@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Factory;
+namespace Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Exception\RuntimeException;
-use Arslanoov\Psr7\Stream;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\RuntimeException;
+use Furious\Psr7\Stream;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use function fopen;

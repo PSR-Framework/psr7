@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Header;
+namespace Furious\Psr7\Header;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\InvalidArgumentException;
 use function preg_match;
 use function is_string;
 use function is_array;

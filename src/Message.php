@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Header\HeaderTrimmer;
-use Arslanoov\Psr7\Header\HeaderValidator;
+use Furious\Psr7\Header\HeaderTrimmer;
+use Furious\Psr7\Header\HeaderValidator;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\StreamInterface;
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\InvalidArgumentException;
 use function mb_strtolower;
 use function implode;
 use function is_integer;

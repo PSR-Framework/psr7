@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Exception\InvalidUploadErrorException;
-use Arslanoov\Psr7\Exception\RuntimeException;
-use Arslanoov\Psr7\Exception\StreamAlreadyMovedException;
-use Arslanoov\Psr7\Exception\UploadErrorException;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\InvalidUploadErrorException;
+use Furious\Psr7\Exception\RuntimeException;
+use Furious\Psr7\Exception\StreamAlreadyMovedException;
+use Furious\Psr7\Exception\UploadErrorException;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;
 use function fopen;

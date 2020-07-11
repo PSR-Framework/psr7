@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UploadedFileInterface;

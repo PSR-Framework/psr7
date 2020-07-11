@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Factory;
+namespace tests\Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Factory\UriFactory;
-use Arslanoov\Psr7\Uri;
+use Furious\Psr7\Factory\UriFactory;
+use Furious\Psr7\Uri;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 

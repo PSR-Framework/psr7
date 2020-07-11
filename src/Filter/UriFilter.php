@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Filter;
+namespace Furious\Psr7\Filter;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Exception\InvalidPortException;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\InvalidPortException;
 use function is_string;
 use function preg_replace_callback;
 use function rawurlencode;

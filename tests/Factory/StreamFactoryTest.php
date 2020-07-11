@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Factory;
+namespace tests\Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Factory\StreamFactory;
-use Arslanoov\Psr7\Stream;
+use Furious\Psr7\Factory\StreamFactory;
+use Furious\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;

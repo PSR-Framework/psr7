@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Exception;
+namespace Furious\Psr7\Exception;
 
 use Throwable;
 use UnexpectedValueException;

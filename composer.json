@@ -1,5 +1,5 @@
 {
-  "name": "arslanoov/furious-psr7",
+  "name": "furious/psr7",
   "description": "PHP 7.4 implementation of PSR-7",
   "license": "MIT",
   "keywords": ["http", "client", "psr7", "request", "php", "php 7.4"],
@@ -26,12 +26,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Arslanoov\\Psr7\\": "src/"
+      "Furious\\Psr7\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Arslanoov\\Psr7\\": "tests/"
+      "Tests\\Furious\\Psr7\\": "tests/"
     }
   },
   "scripts": {

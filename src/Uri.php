@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Exception\UnableToParseUriException;
-use Arslanoov\Psr7\Filter\UriFilter;
-use Arslanoov\Psr7\Builder\UriBuilder;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\UnableToParseUriException;
+use Furious\Psr7\Filter\UriFilter;
+use Furious\Psr7\Builder\UriBuilder;
 use Psr\Http\Message\UriInterface;
 use function parse_url;
 use function is_string;

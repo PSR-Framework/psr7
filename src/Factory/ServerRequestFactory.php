@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Factory;
+namespace Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Header\HeadersCollection;
-use Arslanoov\Psr7\Protocol\Protocol;
-use Arslanoov\Psr7\ServerRequest;
+use Furious\Psr7\Header\HeadersCollection;
+use Furious\Psr7\Protocol\Protocol;
+use Furious\Psr7\ServerRequest;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

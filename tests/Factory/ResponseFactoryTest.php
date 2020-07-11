@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Factory;
+namespace tests\Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Factory\ResponseFactory;
-use Arslanoov\Psr7\Response;
+use Furious\Psr7\Factory\ResponseFactory;
+use Furious\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 

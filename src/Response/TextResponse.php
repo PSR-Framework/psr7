@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Response;
+namespace Furious\Psr7\Response;
 
-use Arslanoov\Psr7\Response;
+use Furious\Psr7\Response;
 
 class TextResponse extends Response
 {

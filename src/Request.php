@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 use function is_string;

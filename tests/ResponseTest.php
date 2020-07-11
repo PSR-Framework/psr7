@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7;
+namespace tests\Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Response;
-use Arslanoov\Psr7\Stream;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Response;
+use Furious\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 

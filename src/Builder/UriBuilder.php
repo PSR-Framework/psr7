@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Builder;
+namespace Furious\Psr7\Builder;
 
 use function ltrim;
 

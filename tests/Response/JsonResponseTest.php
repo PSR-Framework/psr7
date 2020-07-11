@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Response;
+namespace tests\Furious\Psr7\Response;
 
-use Arslanoov\Psr7\Response\JsonResponse;
+use Furious\Psr7\Response\JsonResponse;
 use PHPUnit\Framework\TestCase;
 
 class JsonResponseTest extends TestCase

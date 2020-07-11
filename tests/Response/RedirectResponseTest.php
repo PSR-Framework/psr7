@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Response;
+namespace tests\Furious\Psr7\Response;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Response\RedirectResponse;
-use Arslanoov\Psr7\Uri;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Response\RedirectResponse;
+use Furious\Psr7\Uri;
 use PHPUnit\Framework\TestCase;
 
 class RedirectResponseTest extends TestCase

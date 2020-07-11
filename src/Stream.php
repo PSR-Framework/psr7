@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\IncorrectStreamPositionException;
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Exception\NotReadableStreamException;
-use Arslanoov\Psr7\Exception\NotSeekableStreamException;
-use Arslanoov\Psr7\Exception\NotWritableStreamException;
-use Arslanoov\Psr7\Exception\RuntimeException;
-use Arslanoov\Psr7\Exception\UnableToSeekException;
+use Furious\Psr7\Exception\IncorrectStreamPositionException;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\NotReadableStreamException;
+use Furious\Psr7\Exception\NotSeekableStreamException;
+use Furious\Psr7\Exception\NotWritableStreamException;
+use Furious\Psr7\Exception\RuntimeException;
+use Furious\Psr7\Exception\UnableToSeekException;
 use Psr\Http\Message\StreamInterface;
 use const SEEK_CUR;
 use function is_string;

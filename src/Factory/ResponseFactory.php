@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Factory;
+namespace Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Response;
+use Furious\Psr7\Response;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 

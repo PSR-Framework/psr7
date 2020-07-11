@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Arslanoov\Psr7;
+namespace Tests\Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Exception\UnableToParseUriException;
-use Arslanoov\Psr7\Request;
-use Arslanoov\Psr7\Uri;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Exception\UnableToParseUriException;
+use Furious\Psr7\Request;
+use Furious\Psr7\Uri;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\StreamInterface;
 

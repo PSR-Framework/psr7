@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7\Protocol;
+namespace Furious\Psr7\Protocol;
 
-use Arslanoov\Psr7\Exception\UnownedProtocolVersion;
+use Furious\Psr7\Exception\UnownedProtocolVersion;
 
 final class Protocol
 {

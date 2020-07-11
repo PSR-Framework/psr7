@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Protocol;
+namespace tests\Furious\Psr7\Protocol;
 
-use Arslanoov\Psr7\Exception\UnownedProtocolVersion;
-use Arslanoov\Psr7\Protocol\Protocol;
+use Furious\Psr7\Exception\UnownedProtocolVersion;
+use Furious\Psr7\Protocol\Protocol;
 use PHPUnit\Framework\TestCase;
 
 class ProtocolTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Factory;
+namespace tests\Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Factory\ServerRequestFactory;
-use Arslanoov\Psr7\ServerRequest;
+use Furious\Psr7\Factory\ServerRequestFactory;
+use Furious\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 

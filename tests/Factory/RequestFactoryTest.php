@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace tests\Arslanoov\Psr7\Factory;
+namespace tests\Furious\Psr7\Factory;
 
-use Arslanoov\Psr7\Factory\RequestFactory;
-use Arslanoov\Psr7\Request;
-use Arslanoov\Psr7\Uri;
+use Furious\Psr7\Factory\RequestFactory;
+use Furious\Psr7\Request;
+use Furious\Psr7\Uri;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 

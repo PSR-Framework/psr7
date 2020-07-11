@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Arslanoov\Psr7;
+namespace Furious\Psr7;
 
-use Arslanoov\Psr7\Exception\InvalidArgumentException;
-use Arslanoov\Psr7\Response\Phrases;
+use Furious\Psr7\Exception\InvalidArgumentException;
+use Furious\Psr7\Response\Phrases;
 use Psr\Http\Message\ResponseInterface;
 use function is_int;
 use function is_string;

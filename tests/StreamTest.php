@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Arslanoov\Psr7;
+namespace Tests\Furious\Psr7;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Arslanoov\Psr7\Stream;
+use Furious\Psr7\Stream;
 
 class StreamTest extends TestCase
 {
