@@ -13,7 +13,8 @@ use function preg_match;
 class Request extends Message implements RequestInterface
 {
     private const METHODS = [
-        'GET', 'POST', 'PUT', 'PATCH', 'DELETE'
+        'GET', 'POST', 'PUT', 'PATCH', 'DELETE',
+        'HEAD', 'CONNECT', 'OPTIONS', 'TRACE'
     ];
 
     private string $method;
