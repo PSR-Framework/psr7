@@ -11,7 +11,17 @@ PSR-7 implementation for PHP 7.4+
 [![Monthly Downloads](https://poser.pugx.org/furious/psr7/d/monthly.png)](https://packagist.org/packages/furious/psr7)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
+Install:
 
-Part of micro framework "furious" (soon)
+    composer require furious/psr7
+    
+Use:
 
-composer require furious/psr7
+    use Furious\Psr7\Factory\ServerRequestFactory;
+    
+    $request = (new ServerRequestFactory)->fromGlobals();
+    $response = /* get response by request */
+    
+    // emitting a response
+    
+    $someHttpRunner->run($response);
